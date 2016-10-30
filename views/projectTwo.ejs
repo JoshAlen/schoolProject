@@ -1,1 +1,500 @@
-<h1>still working on it</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Project Two</title>
+    <style>
+    p {
+      letter-spacing: 0.4em;
+      padding: 0 0;
+      margin: 0 0;
+      text-align: left;
+    }
+    #line {
+        letter-spacing: 0.58em;
+        text-align: left;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h4>Check Protection && Writing the Word Equivalent of a Check Amount</h4>
+      <input type="text" id="input" name ='number'></input>
+      <button id="getNumber">Enter</button>
+      <p id="output"></p>
+      <p id="line">---------</p>
+      <p>123456789</p>
+      <br>
+      <p id="writeCheck"></p>
+
+    <script type="text/javascript">
+      //Getting value from input by clicking the button.
+      document.getElementById("getNumber").onclick = function(){
+
+        document.getElementById('writeCheck').innerHTML = "";
+        var inputNumber = document.getElementById('input').value;
+        //change string into number
+        inputNumber = Number(inputNumber);
+        //fix the number to 2 dec.
+        inputNumber = inputNumber.toFixed(2);
+
+        var units = {
+          0: 'zero', 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five',
+          6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten', 11: 'Eleven', 12: 'Twelve', 13: 'Thirteen',
+          14: 'Fourteen', 15: 'Fifteen', 16: 'Sixteen', 17: 'Seventeen', 18: 'Eighteen', 19: 'Nineteen', 20: 'Twenty',
+          30: 'Thirty', 40: 'Fourty', 50: 'Fifty', 60: 'Sixty', 70: 'Seventy', 80: 'Eighty', 90: 'Ninety'
+        };
+
+
+        //checking the value to match the right amount of * to print.
+        // if the input number is big than what we can print, print error message.
+        if(inputNumber >= 1000000){
+          document.getElementById('output').innerHTML = "Error, Check too big";
+          // else if input number is bigger than or equal to 100,000
+        } else if ( inputNumber >= 100000) {
+          document.getElementById('output').innerHTML = "" + inputNumber;
+          // checking for thousands.
+        if(inputNumber.charAt(1) == 0 && inputNumber.charAt(2) == 0) {
+                document.getElementById('writeCheck').innerHTML = units[inputNumber.charAt(0)];
+                if(inputNumber.charAt(0) == 1){
+                    document.getElementById('writeCheck').innerHTML += "  Hundred Thousand ";
+                  } else {
+                    document.getElementById('writeCheck').innerHTML += " Hundred Thousands "
+                }
+
+                if(inputNumber.charAt(4) == 0 && inputNumber.charAt(5) == 0) {
+                  if(inputNumber.charAt(3) == 1){
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                    document.getElementById('writeCheck').innerHTML += "  Hundred ";
+                  } else if (inputNumber.charAt(3) > 1){
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                    document.getElementById('writeCheck').innerHTML += " Hundreds ";
+                }
+
+          } else if (inputNumber.charAt(4) == 0 && inputNumber.charAt(5) != 0) {
+
+                if(inputNumber.charAt(3) == 1){
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                  document.getElementById('writeCheck').innerHTML += "  Hundred ";
+                } else if (inputNumber.charAt(3) > 1) {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                  document.getElementById('writeCheck').innerHTML += " Hundreds ";
+                }
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+
+          } else if (inputNumber.charAt(4) != 0 && inputNumber.charAt(5) == 0) {
+
+
+                if(inputNumber.charAt(3) == 1){
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                  document.getElementById('writeCheck').innerHTML += "  Hundred ";
+                } else if (inputNumber.charAt(3) > 1) {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                  document.getElementById('writeCheck').innerHTML += " Hundreds ";
+                }
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(4, 6)];
+
+          } else {
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+                document.getElementById('writeCheck').innerHTML += " Hundred ";
+                document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6) - inputNumber.charAt(5))];
+                document.getElementById('writeCheck').innerHTML += "-";
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+
+          }
+
+                document.getElementById('writeCheck').innerHTML += " dollars and ";
+                document.getElementById('writeCheck').innerHTML += inputNumber.charAt(7);
+                document.getElementById('writeCheck').innerHTML += inputNumber.charAt(8);
+                document.getElementById('writeCheck').innerHTML += "/100--";
+// important checking if is more than hundred thousand.
+          } else if (inputNumber.charAt(1) == 0 && inputNumber.charAt(2) != 0) {
+
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+                document.getElementById('writeCheck').innerHTML += " Hundreds ";
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                document.getElementById('writeCheck').innerHTML += "  Thousands "
+
+            if(inputNumber.charAt(4) == 0 && inputNumber.charAt(5) == 0) {
+              if(inputNumber.charAt(3) == 1){
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                document.getElementById('writeCheck').innerHTML += "  Hundred ";
+              } else if (inputNumber.charAt(3) > 1){
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                document.getElementById('writeCheck').innerHTML += " Hundreds ";
+            }
+
+      } else if (inputNumber.charAt(4) == 0 && inputNumber.charAt(5) != 0) {
+
+            if(inputNumber.charAt(3) == 1){
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+              document.getElementById('writeCheck').innerHTML += "  Hundred ";
+            } else if (inputNumber.charAt(3) > 1) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+              document.getElementById('writeCheck').innerHTML += " Hundreds ";
+            }
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+
+      } else if (inputNumber.charAt(4) != 0 && inputNumber.charAt(5) == 0) {
+
+
+            if(inputNumber.charAt(3) == 1){
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+              document.getElementById('writeCheck').innerHTML += "  Hundred ";
+            } else if (inputNumber.charAt(3) > 1) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+              document.getElementById('writeCheck').innerHTML += " Hundreds ";
+            }
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(4, 6)];
+
+      } else {
+          if((inputNumber.slice(4, 6) - inputNumber.charAt(5)) < 20) {
+            document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6))];
+          } else {
+            document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6) - inputNumber.charAt(5))];
+            document.getElementById('writeCheck').innerHTML += "-";
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+          }
+      }
+
+            document.getElementById('writeCheck').innerHTML += " dollars and ";
+            document.getElementById('writeCheck').innerHTML += inputNumber.charAt(7);
+            document.getElementById('writeCheck').innerHTML += inputNumber.charAt(8);
+            document.getElementById('writeCheck').innerHTML += "/100--";
+
+// important find ten hundred thousands
+
+          } else if (inputNumber.charAt(1) != 0 && inputNumber.charAt(2) == 0) {
+
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+            document.getElementById('writeCheck').innerHTML += " Hundreds ";
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(1, 3)];
+            document.getElementById('writeCheck').innerHTML += "  Thousands "
+
+        if(inputNumber.charAt(4) == 0 && inputNumber.charAt(5) == 0) {
+          if(inputNumber.charAt(3) == 1){
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+            document.getElementById('writeCheck').innerHTML += "  Hundred ";
+          } else if (inputNumber.charAt(3) > 1){
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+            document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        }
+
+  } else if (inputNumber.charAt(4) == 0 && inputNumber.charAt(5) != 0) {
+
+        if(inputNumber.charAt(3) == 1){
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += "  Hundred ";
+        } else if (inputNumber.charAt(3) > 1) {
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        }
+        document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+
+  } else if (inputNumber.charAt(4) != 0 && inputNumber.charAt(5) == 0) {
+
+
+        if(inputNumber.charAt(3) == 1){
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += "  Hundred ";
+        } else if (inputNumber.charAt(3) > 1) {
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        }
+        document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(4, 6)];
+
+      } else {
+        document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+        document.getElementById('writeCheck').innerHTML += " Hundred ";
+        if((inputNumber.slice(4, 6) - inputNumber.charAt(5)) < 20) {
+          document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6))];
+        } else {
+
+          document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6) - inputNumber.charAt(5))];
+          document.getElementById('writeCheck').innerHTML += "-";
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+        }
+
+      }
+
+        document.getElementById('writeCheck').innerHTML += " dollars and ";
+        document.getElementById('writeCheck').innerHTML += inputNumber.charAt(7);
+        document.getElementById('writeCheck').innerHTML += inputNumber.charAt(8);
+        document.getElementById('writeCheck').innerHTML += "/100--";
+      }  else {
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+          document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        if(inputNumber.slice(1, 3) - inputNumber.charAt(2) < 20) {
+          document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(1, 3))];
+          document.getElementById('writeCheck').innerHTML += "  Thousands ";
+        } else {
+          document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(1, 3) - inputNumber.charAt(2))];
+          document.getElementById('writeCheck').innerHTML += " ";
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+          document.getElementById('writeCheck').innerHTML += "  Thousands ";
+        }
+        if(inputNumber.charAt(4) == 0 && inputNumber.charAt(5) == 0) {
+          if(inputNumber.charAt(3) == 1){
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+            document.getElementById('writeCheck').innerHTML += "  Hundred ";
+          } else if (inputNumber.charAt(3) > 1){
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+            document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        }
+
+  } else if (inputNumber.charAt(4) == 0 && inputNumber.charAt(5) != 0) {
+
+        if(inputNumber.charAt(3) == 1){
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += "  Hundred ";
+        } else if (inputNumber.charAt(3) > 1) {
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        }
+        document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+
+  } else if (inputNumber.charAt(4) != 0 && inputNumber.charAt(5) == 0) {
+
+
+        if(inputNumber.charAt(3) == 1){
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += "  Hundred ";
+        } else if (inputNumber.charAt(3) > 1) {
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+          document.getElementById('writeCheck').innerHTML += " Hundreds ";
+        }
+        document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(4, 6)];
+
+      } else {
+        document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+        document.getElementById('writeCheck').innerHTML += " Hundred ";
+        if((inputNumber.slice(4, 6) - inputNumber.charAt(5)) < 20) {
+          document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6))];
+        } else {
+
+          document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(4, 6) - inputNumber.charAt(5))];
+          document.getElementById('writeCheck').innerHTML += "-";
+          document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(5)];
+        }
+
+      }
+
+        document.getElementById('writeCheck').innerHTML += " dollars and ";
+        document.getElementById('writeCheck').innerHTML += inputNumber.charAt(7);
+        document.getElementById('writeCheck').innerHTML += inputNumber.charAt(8);
+        document.getElementById('writeCheck').innerHTML += "/100--";
+
+
+      }
+
+            // else if input number is bigger than or equal to 10,000
+        } else if (inputNumber >= 10000) {
+          document.getElementById('output').innerHTML = "*" + inputNumber;
+            if (inputNumber.charAt(1) == 0){
+              if(inputNumber.charAt(3) == 0 && inputNumber.charAt(4) == 0) {
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                document.getElementById('writeCheck').innerHTML += " Thousands ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+                } else if (inputNumber.charAt(3) == 0 && inputNumber.charAt(4) != 0) {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                  document.getElementById('writeCheck').innerHTML += " Thousands ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                } else if (inputNumber.charAt(3) != 0 && inputNumber.charAt(4) == 0) {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                  document.getElementById('writeCheck').innerHTML += " Thousands ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(3, 5)];
+                } else {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                  document.getElementById('writeCheck').innerHTML += " Thousands ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+
+                  if((inputNumber.slice(3, 5) - inputNumber.charAt(4)) < 20) {
+                    document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(3, 5))];
+                  } else {
+
+                    document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(3, 5) - inputNumber.charAt(4))];
+                    document.getElementById('writeCheck').innerHTML += "-";
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(4)];
+                  }
+                }
+                document.getElementById('writeCheck').innerHTML += " dollars and ";
+                document.getElementById('writeCheck').innerHTML += inputNumber.charAt(6);
+                document.getElementById('writeCheck').innerHTML += inputNumber.charAt(7);
+                document.getElementById('writeCheck').innerHTML += "/100--";
+            } else if (inputNumber.charAt(1) != 0){
+
+              if(inputNumber.charAt(3) == 0 && inputNumber.charAt(4) == 0) {
+                if((inputNumber.slice(0, 2) - inputNumber.charAt(2)) < 20) {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                  document.getElementById('writeCheck').innerHTML += " Thousands ";
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                    document.getElementById('writeCheck').innerHTML += " Hundred ";
+                } else {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Thousands ";
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                    document.getElementById('writeCheck').innerHTML += " Hundred ";
+                }
+
+                } else if (inputNumber.charAt(3) == 0 && inputNumber.charAt(4) != 0) {
+                  if((inputNumber.slice(0, 2) - inputNumber.charAt(2)) < 20) {
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                    document.getElementById('writeCheck').innerHTML += " Thousands ";
+                      document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                      document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  } else {
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                    document.getElementById('writeCheck').innerHTML += " Thousands ";
+                      document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                      document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  }
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+                } else if (inputNumber.charAt(3) != 0 && inputNumber.charAt(4) == 0) {
+                  if((inputNumber.slice(0, 2) - inputNumber.charAt(2)) < 20) {
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                    document.getElementById('writeCheck').innerHTML += " Thousands ";
+                      document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                      document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  } else {
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                    document.getElementById('writeCheck').innerHTML += " Thousands ";
+                      document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                      document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  }
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(3, 5)];
+                } else {
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Thousands ";
+                  document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+                  document.getElementById('writeCheck').innerHTML += " Hundred ";
+
+                  if((inputNumber.slice(3, 5) - inputNumber.charAt(4)) < 20) {
+                    document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(3, 5))];
+                  } else {
+
+                    document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(3, 5) - inputNumber.charAt(4))];
+                    document.getElementById('writeCheck').innerHTML += "-";
+                    document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(4)];
+                  }
+                }
+                document.getElementById('writeCheck').innerHTML += " dollars and ";
+                document.getElementById('writeCheck').innerHTML += inputNumber.charAt(6);
+                document.getElementById('writeCheck').innerHTML += inputNumber.charAt(7);
+                document.getElementById('writeCheck').innerHTML += "/100--";
+            }
+            // else if input number is bigger than or equal to 1,000 .
+        } else if (inputNumber >= 1000) {
+          document.getElementById('output').innerHTML = "**" + inputNumber;
+
+          if(inputNumber.charAt(2) == 0 && inputNumber.charAt(3) == 0) {
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+            document.getElementById('writeCheck').innerHTML += " Thousands ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(1)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+            } else if (inputNumber.charAt(2) == 0 && inputNumber.charAt(3) != 0) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Thousands ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(1)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+            } else if (inputNumber.charAt(2) != 0 && inputNumber.charAt(3) == 0) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Thousands ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(1)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(2, 4)];
+            } else {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Thousands ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(1)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+
+              if((inputNumber.slice(2, 4) - inputNumber.charAt(3)) < 20) {
+                document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(2, 4))];
+              } else {
+
+                document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(2, 4) - inputNumber.charAt(3))];
+                document.getElementById('writeCheck').innerHTML += "-";
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(3)];
+              }
+            }
+            document.getElementById('writeCheck').innerHTML += " dollars and ";
+            document.getElementById('writeCheck').innerHTML += inputNumber.charAt(5);
+            document.getElementById('writeCheck').innerHTML += inputNumber.charAt(6);
+            document.getElementById('writeCheck').innerHTML += "/100--";
+
+
+
+            // else if input number is bigger than or equal to 100.
+        } else if (inputNumber >= 100) {
+          document.getElementById('output').innerHTML = "***" + inputNumber;
+
+          if(inputNumber.charAt(1) == 0 && inputNumber.charAt(2) == 0) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+            } else if (inputNumber.charAt(1) == 0 && inputNumber.charAt(2) != 0) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+            } else if (inputNumber.charAt(1) != 0 && inputNumber.charAt(2) == 0) {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(1, 3)];
+            } else {
+              document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+              document.getElementById('writeCheck').innerHTML += " Hundred ";
+
+              if((inputNumber.slice(1, 3) - inputNumber.charAt(2)) < 20) {
+                document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(1, 3))];
+              } else {
+
+                document.getElementById('writeCheck').innerHTML += units[(inputNumber.slice(1, 3) - inputNumber.charAt(2))];
+                document.getElementById('writeCheck').innerHTML += "-";
+                document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(2)];
+              }
+            }
+            document.getElementById('writeCheck').innerHTML += " dollars and ";
+            document.getElementById('writeCheck').innerHTML += inputNumber.charAt(4);
+            document.getElementById('writeCheck').innerHTML += inputNumber.charAt(5);
+            document.getElementById('writeCheck').innerHTML += "/100--";
+
+            // else if input number is bigger than or equal to 10.
+        } else if (inputNumber >= 10) {
+          document.getElementById('output').innerHTML = "****" + inputNumber;
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.slice(0, 2)];
+            document.getElementById('writeCheck').innerHTML += " dollars and ";
+            document.getElementById('writeCheck').innerHTML += "/100--";
+
+            // else if input number is bigger or equal to zero.
+        } else if (inputNumber >= 0) {
+          document.getElementById('output').innerHTML = "*****" + inputNumber;
+          if(inputNumber.charAt(0) == 1 || inputNumber.charAt(0) == 0 ){
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+            document.getElementById('writeCheck').innerHTML += " dollar and ";
+          } else if (inputNumber.charAt(0) > 1) {
+            document.getElementById('writeCheck').innerHTML += units[inputNumber.charAt(0)];
+            document.getElementById('writeCheck').innerHTML += " dollars and ";
+          }
+          document.getElementById('writeCheck').innerHTML += "/100--";
+        }
+      }
+
+    </script>
+  </body>
+</html>
