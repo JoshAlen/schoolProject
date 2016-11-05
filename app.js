@@ -17,6 +17,12 @@ app.get("/projectone", function(req, res){
 app.get("/projectTwo", function(req, res){
    res.render("projectTwo");
 });
+app.get("/projectThreePartOne", function(req, res){
+   res.render("projectThreePartOne");
+});
+app.get("/projectThreePartTwo", function(req, res){
+   res.render("projectThreePartTwo");
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("server is running"); 
